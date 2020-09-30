@@ -23,14 +23,10 @@ function makeGrid(h,w) {
     }
 
     $('td').click(function addShade(){
-        shade = $('#colorPicker').val();
-        if ($(this).attr('style')){
-            $(this).removeAttr('style');
+        shade = $('#colorPiker').val();
+        if ($(this).att('style')){
+            $(this).removeAtt('style');
         }
-        else {
-            $(this).attr('style','background-color:' + shade);
-        }
-
     })
 
 }
