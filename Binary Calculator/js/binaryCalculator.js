@@ -20,6 +20,9 @@ document.getElementById('btnEql').onclick = () => {
     case "+":
       result = operand1 + operand2;
       break;
+    case "-":
+      result = operand1 - operand2;
+      break;
     case "*":
       result = operand1 * operand2;
       break;
@@ -32,6 +35,9 @@ document.getElementById('btnEql').onclick = () => {
 
 document.getElementById('btnSum').onclick = () => {
   res.innerHTML += '+';
+}
+document.getElementById('btnSub').onclick = () => {
+  res.innerHTML += '-';
 }
 document.getElementById('btnMul').onclick = () => {
   res.innerHTML += '*';
