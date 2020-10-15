@@ -1,32 +1,49 @@
-// Select color input
-// Select size input
-var height, width, shade;
-// When size is submitted by the user, call makeGrid()
+function makeGrid(height, width) {
+    const table = document.getElementById("pixelCanvas");
+    let grid = '';
 
-$('#sizePicker').submit(function(event){
-    event.preventDefault();
-    height = $('#inputHeight').val();
-    width = $('#inputWidth').val();
-    makeGrid(height,width);
-    //console.log('Height = ' +height+ ' and Width='+width)
-})
-
-function makeGrid(h,w) {
-
-    $('tr').remove();
-
-    for(let i=1; i<=h; i++){
-        $('#pixelCanvas').append('<tr id=table' + i + '></tr>');
-        for(let j=0; i<w; j++){
-            $('#table' + i).append('<td></td>');
+    // loop over each row
+    for (let i = 0; i < height; i++) {
+        grid += '<tr class="row-' + i + '">';
+        // loop for each cell
+        for (let j = 0; j < width; j++) {
+            grid += '<td class="cell" id="row-' + i + '_cell-' + j + '"></td>';
         }
+        grid += '</tr>';
     }
+    // add grid into table element
+    table.innerHTML = grid;
 
-    $('td').click(function addShade(){
-        shade = $('#colorPiker').val();
-        if ($(this).att('style')){
-            $(this).removeAtt('style');
-        }
-    })
-
+    // Add click event to grid cells once the table grid has been created
+    addClickEventToCells();
 }
+
+// gets values for height and width from form and uses them to call makrGrid()
+function formSubmission() {
+    event.preventDefault();
+    const height = document.getElementById('inputHeight').value;
+    const width = document.getElementById('inputWidth').value;
+    makeGrid(height, width);
+}
+
+// add click events to all cells
+function addClickEventToCells() {
+    // on color selection return color:
+    const colorPicker = document.getElementById("colorPicker");
+    const cells = document.getElementsByClassName('cell');
+    for (let i = 0; i < cells.length; i++) {
+        cells[i].addEventListener("click", function (event) {
+                let clickedCell = event.target;
+                clickedCell.style.backgroundColor = colorPicker.value;
+            });
+    }
+}
+
+
+// on submit of form #sizePicker:
+document.getElementById('sizePicker').onsubmit = function () {
+    formSubmission();
+};
+
+// Build a default 10x10 grid.
+//makeGrid(10, 10);
